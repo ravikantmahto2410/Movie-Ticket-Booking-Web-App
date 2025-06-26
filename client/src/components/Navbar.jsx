@@ -36,31 +36,31 @@ const Navbar = () => {
         />
         <Link
           to='/'
-          onClick={() => {scrollTo(0,0), setIsOpen(false)}}
+          onClick={() => {scrollTo(0,0); setIsOpen(false)}}
         >
           Home
         </Link>
         <Link
           to='/movies'
-          onClick={() => {scrollTo(0,0), setIsOpen(false)}}
+          onClick={() => {scrollTo(0,0); setIsOpen(false)}}
         >
           Movies
         </Link>
         <Link
           to='/'
-          onClick={() => {scrollTo(0,0), setIsOpen(false)}}
+          onClick={() => {scrollTo(0,0); setIsOpen(false)}}
         >
           Theaters
         </Link>
         <Link
           to='/'
-          onClick={() => {scrollTo(0,0), setIsOpen(false)}}
+          onClick={() => {scrollTo(0,0); setIsOpen(false)}}
         >
           Releases
         </Link>
         <Link
           to='/favorite'
-          onClick={() => {scrollTo(0,0), setIsOpen(false)}}
+          onClick={() => {scrollTo(0,0); setIsOpen(false)}}
         >
           Favorites
         </Link>
