@@ -48,7 +48,7 @@ const Dashboard = () => {
 
   useEffect(() => {
     fetchDashboardData();
-  })
+  },[])
 
 
   return !loading ? (

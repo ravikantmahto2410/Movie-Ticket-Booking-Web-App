@@ -31,7 +31,7 @@ const ListShows = () => {
 
   useEffect(() => {
     getAllShows();
-  })
+  },[])
 
   return !loading ? (
     <>
