@@ -2,7 +2,8 @@ import React, { useEffect, useState } from 'react'
 import { dummyShowsData } from '../../assets/assets'
 import Loading from '../../components/Loading'
 import Title from '../../components/Admin/Title'
-import { StarIcon } from 'lucide-react'
+import { CheckIcon, StarIcon } from 'lucide-react'
+import { kConverter } from '../../lib/kConverter'
 const AddShows = () => {
   const currency = import.meta.env.VITE_CURRENCY
   const [nowPlayingMovies, setNowPlayingMovies] = useState([])
@@ -27,6 +28,7 @@ const AddShows = () => {
         <div className='group flex flex-wrap gap-4 mt-4 w-max'>
           {nowPlayingMovies.map((movie) => (
             <div 
+              onClick={() => setSelectedMovie(movie.id)}
               key={movie.id}
               className={`relative max-w-40 cursor-pointer group-hover:not-hover:opacity-40
               hover:-translate-y-1 transition duration-300`}>
@@ -41,11 +43,17 @@ const AddShows = () => {
                     <StarIcon className='w-4 h-4 text-primary fill-primary'/>
                     {movie.vote_average.toFixed(1)};
                   </p>
-                  <p className='text-gray-300'>{movie.vote_count} Votes</p>
+                  <p className='text-gray-300'>{kConverter(movie.vote_count)} Votes</p>
 
                 </div>
 
               </div>
+              {selectedMovie === movie.id && (
+                <div className='absolute top-2 right-2 flex items-center justify-center bg-primary
+                h-6 w-6 rounded'>
+                  <CheckIcon className='w-4 h-4 text-white' strokeWidth={2.5}/>
+                </div>
+              )}
 
             </div>
           ))}
