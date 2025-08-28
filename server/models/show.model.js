@@ -9,4 +9,4 @@ const showSchema = new Schema(
     },{minimize: false}
 )
 
-export const Show = mongoose.model("Show", movieSchema)
+export const Show = mongoose.model("Show", showSchema)
