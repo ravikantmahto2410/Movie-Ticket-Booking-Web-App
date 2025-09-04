@@ -3,6 +3,7 @@ import React, { useState } from 'react'
 import { assets } from '../assets/assets'
 import { Link, useNavigate } from 'react-router-dom'
 import { useClerk, UserButton, useUser } from '@clerk/clerk-react'
+import { useAppContext } from '../context/AppContext'
 
 
 const Navbar = () => {
@@ -13,6 +14,7 @@ const Navbar = () => {
 
   const navigate = useNavigate()
 
+    const {favoriteMovies} = useAppContext()
 
   return (
     <div className='fixed top-0 left-0 z-50 w-full flex items-center 
@@ -58,12 +60,12 @@ const Navbar = () => {
         >
           Releases
         </Link>
-        <Link
+        {favoriteMovies.length > 0 && <Link
           to='/favorite'
           onClick={() => {scrollTo(0,0); setIsOpen(false)}}
         >
           Favorites
-        </Link>
+        </Link>}
       </div>
       <div className='flex items-center gap-8'>
         <SearchIcon className='max-md:hidden w-6 h-6 cursor-pointer'/>
