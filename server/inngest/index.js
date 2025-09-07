@@ -2,6 +2,7 @@ import { Inngest } from "inngest";
 import { User } from "../models/user.model.js";
 import { Booking } from "../models/booking.model.js";
 import { Show } from "../models/show.model.js";
+import sendEmail from "../configs/nodemailer.js";
 
 export const inngest = new Inngest({ id: "movie-ticket-booking" });
 
@@ -83,5 +84,43 @@ const releaseSeatsAndDeleteBooking = inngest.createFunction(
     }
 )
 
+//Ingest function to send email when user books a show
+const sendBookingConfirmationEmail = inngest.createFunction(
+    {id: "send-booking-confirmation-email"},
+    {event: "app/show.booked"},
+    async({event, step}) => {
+        const { bookingId } = event.data;
 
-export const functions = [syncUserCreation, syncUserDeletion, syncUserUpdation, releaseSeatsAndDeleteBooking];
+        const booking = await Booking.findById(bookingId).populate({
+            path : 'show',
+            populate: {path: "movie",
+                model: "Movie"
+            }
+        }).populate('user');
+
+        await sendEmail({
+            to: booking.user.email,
+            subject: `Payment Confirmation : "${booking.show.movie.title}" booked!`,
+            body: `<div style="font-family: Arial, snas-serif; line-height:1.5;">
+                <h2>Hi ${booking.user.name},</h2>
+                <p>Your booking for <strong style="color:#F84565;">
+                    "${booking.show.movie.title}"
+                </strong>
+                </p>
+                <p>
+                    <strong>Date:</strong>${new Date(booking.show.showDateTime).toLocaleDateString('en-US', {timeZone:
+                    'Asia/Kolkata'})}<br/>
+                    <strong>Time:</strong> ${new Date(booking.show.showDateTime).toLocaleTimeString('en-US',{timeZone:
+                    'Asia/Kolkata'})}
+                </p>
+                <p>Enjoy the show</p>
+                <p>Thanks for booking with us!<br/>--Entertaino Team</p>
+            </div>`
+        })
+    }
+
+    
+)
+
+
+export const functions = [syncUserCreation, syncUserDeletion, syncUserUpdation, releaseSeatsAndDeleteBooking,sendBookingConfirmationEmail];
