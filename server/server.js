@@ -10,10 +10,12 @@ import bookingRouter from './routes/booking.routes.js';
 import adminRouter from './routes/admin.routes.js';
 import userRouter from './routes/user.routes.js';
 import { stripeWebhooks } from './controllers/stripeWebhook.controller.js';
-const app = express();
-const port = process.env.PORT || 8000;
+
 
 await connectDB()
+
+const app = express();
+const port = process.env.PORT || 8000;
 
 
 //Stripe webhook route
