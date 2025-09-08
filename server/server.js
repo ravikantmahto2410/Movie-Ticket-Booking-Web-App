@@ -11,7 +11,7 @@ import adminRouter from './routes/admin.routes.js';
 import userRouter from './routes/user.routes.js';
 import { stripeWebhooks } from './controllers/stripeWebhook.controller.js';
 const app = express();
-const port = 8000;
+const port = process.env.PORT || 8000;
 
 await connectDB()
 
