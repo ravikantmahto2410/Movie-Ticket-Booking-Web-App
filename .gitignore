@@ -3,7 +3,7 @@ __pycache__/
 *.pyc
 *.pyd
 .Python
-Lib/
+
 Include/
 bin
 sdist
