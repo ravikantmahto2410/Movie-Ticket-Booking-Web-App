@@ -8,7 +8,7 @@ import MovieCard from '../components/MovieCard'
 import Loading from '../components/Loading'
 import { useAppContext } from '../context/AppContext'
 import toast from 'react-hot-toast'
-import  timeFormat  from  '../lib/timeFormat'
+
 
 const MovieDetails = () => {
 
