@@ -24,7 +24,7 @@ const Navbar = () => {
         className='max-md:flex-1'
       >
         <img className='w-36 h-auto'
-          src={assets.logo} alt=""
+          src={assets.logo_entertaino} alt=""
         />
       </Link>
       <div className={`max-md:absolute max-md:top-0 max-md:left-0 max-md:font-medium
